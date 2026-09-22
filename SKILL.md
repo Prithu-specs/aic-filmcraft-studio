@@ -21,7 +21,7 @@ Work in this order:
 6. Review clips, joins, and sound before assembling the next dependency.
 7. Finish, verify, deliver, archive, and capture the lesson.
 
-Use [production modes](references/production-modes.md) to choose the right depth. Use [working templates](references/templates.md) to create the production records. Use [roles and quality controls](references/roles-and-quality.md) when the project has more than one scene, a team, significant cost, a competition, or a public release. See the [studio coverage map](references/studio-map.md) for the workflow integration.
+Use [production modes](references/production-modes.md) to choose the right depth. Use [working templates](references/templates.md) to create the production records. Use [roles and quality controls](references/roles-and-quality.md) when the project has more than one scene, a team, significant cost, a competition, or a public release. See the [studio coverage map](references/studio-map.md) for the workflow integration and the [full operating playbook](references/operating-playbook.md) for all twenty operating actions and specialist department routing.
 
 ## 1. Select a production mode
 
