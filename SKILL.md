@@ -288,3 +288,15 @@ After a reinstall, update the active wrapper to name the canonical checkout and 
 5. a rollback location for the retired runtime and model weights.
 
 A successful smoke render proves only installation health. It does not approve character continuity, story assets, or a paid production clip; the dispatch and asset-first gates still apply.
+
+### Local MiniMax reference-compatibility control — mandatory
+
+The installed streamed low-memory MiniMax H3 route is **text-to-video only**. It cannot accept an image or start-frame reference. Therefore it is prohibited for any shot whose character, prop, geography, or action continuity depends on an approved image lock. Do not remove the reference merely to make MiniMax run.
+
+For a locked narrative shot, select a verified reference-capable generator and retain the same Filmcraft unit bundle. Local MiniMax remains available for unreferenced tests, abstract inserts, or non-continuity material after preflight. The preflight must explicitly record `reference-mode`; a start-frame request on this route is a hard block, not a retry condition.
+
+### Local MiniMax reference-compatibility control — mandatory
+
+The installed streamed low-memory MiniMax H3 route is **text-to-video only**. It cannot accept an image or start-frame reference. Therefore it is prohibited for any shot whose character, prop, geography, or action continuity depends on an approved image lock. Do not remove the reference merely to make MiniMax run.
+
+For a locked narrative shot, select a verified reference-capable generator and retain the same Filmcraft unit bundle. Local MiniMax remains available for unreferenced tests, abstract inserts, or non-continuity material after preflight. The preflight must explicitly record `reference-mode`; a start-frame request on this route is a hard block, not a retry condition.

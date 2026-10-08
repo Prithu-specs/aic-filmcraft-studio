@@ -53,3 +53,15 @@ This gate reduces risk but cannot prove a third-party repository is safe. Preser
 If a local installation is repaired or reinstalled, keep the model weights separately from code so the clean checkout can be rebuilt without an unnecessary 136 GB redownload. Retire the old checkout for rollback until the replacement passes verification; do not let the active wrapper import a copied runtime directory from another project.
 
 Record the remote, immutable revision, Git integrity result, dependency-lock install result, actual resolved `minimax_h3_mlx` file path, absolute FFmpeg path, and a decoded smoke MP4. A smoke test confirms that the installation can run; it is not a substitute for the Filmcraft asset-first continuity review before a narrative render.
+
+## Reference-conditioning compatibility
+
+The current streamed low-memory MiniMax H3 installation supports text-to-video only. It rejects `--image` / start-frame conditioning before inference. Its non-low-memory image route is outside the safe memory envelope of this 48 GB Mac. For any character-locked or prop-locked narrative unit, do not remove the reference to force a render; select a verified reference-capable route and keep the same unit assets, prompt, ledger, and review criteria.
+
+The local preflight now requires `--reference-mode`. `start-frame` is intentionally blocked on this route. `none` is permitted only for material whose continuity does not depend on an image lock.
+
+## Reference-conditioning compatibility
+
+The current streamed low-memory MiniMax H3 installation supports text-to-video only. It rejects `--image` / start-frame conditioning before inference. Its non-low-memory image route is outside the safe memory envelope of this 48 GB Mac. For any character-locked or prop-locked narrative unit, do not remove the reference to force a render; select a verified reference-capable route and keep the same unit assets, prompt, ledger, and review criteria.
+
+The local preflight now requires `--reference-mode`. `start-frame` is intentionally blocked on this route. `none` is permitted only for material whose continuity does not depend on an image lock.

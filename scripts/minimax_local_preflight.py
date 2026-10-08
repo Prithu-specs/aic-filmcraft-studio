@@ -39,7 +39,8 @@ def main() -> int:
     parser.add_argument("--model-root", type=Path, required=True)
     parser.add_argument("--turbo-lora", type=Path, required=True)
     parser.add_argument("--runtime", type=Path, required=True)
-    parser.add_argument("--start-frame", type=Path, required=True)
+    parser.add_argument("--start-frame", type=Path)
+    parser.add_argument("--reference-mode", choices=("none", "start-frame"), default="start-frame", help="Use start-frame only when the selected route supports image conditioning.")
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--ffmpeg", type=Path, default=Path(shutil.which("ffmpeg") or ""))
     args = parser.parse_args()
@@ -65,7 +66,16 @@ def main() -> int:
     check("model_root", (args.model_root / "transformer").is_dir(), "Expected MiniMax FL2VA transformer directory is missing." if not (args.model_root / "transformer").is_dir() else "Transformer directory found.")
     check("turbo_lora", args.turbo_lora.is_file(), "Turbo LoRA file is missing." if not args.turbo_lora.is_file() else "Turbo LoRA file found.")
     check("runtime", args.runtime.is_file(), "Reference-enabled runtime wrapper is missing." if not args.runtime.is_file() else "Runtime wrapper found.")
-    check("start_frame", args.start_frame.is_file(), "Approved start-frame lock is missing." if not args.start_frame.is_file() else "Start-frame lock found.")
+    if args.reference_mode == "start-frame":
+        start_frame_ok = args.start_frame is not None and args.start_frame.is_file()
+        check("start_frame", start_frame_ok, "Approved start-frame lock is missing." if not start_frame_ok else "Start-frame lock found.")
+        check(
+            "reference_mode",
+            False,
+            "This installed MiniMax H3 low-memory route supports text-to-video only; it cannot render a start-frame-locked shot. Select a verified reference-capable route instead.",
+        )
+    else:
+        check("reference_mode", True, "Text-to-video route selected; no image lock will be attached.")
     check(
         "ffmpeg",
         args.ffmpeg.is_file() and os.access(args.ffmpeg, os.X_OK),
