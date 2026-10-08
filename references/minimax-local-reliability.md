@@ -6,7 +6,7 @@ Use this reference only for local MiniMax H3 work.
 
 The installed route uses a streamed BF16 MiniMax H3 model and BF16 Turbo LoRA. Its documented production example is a 1344×768, 5-second source clip. On this machine, attempting a 10-second source clip caused a Metal command-buffer out-of-memory failure. Therefore, the active production ceiling is **5 seconds per source clip** until a later, documented feasibility test proves otherwise.
 
-Delivery resolution is separate from source resolution. A completed source clip may be cropped and upscaled to 1920×1080 at 24 fps only after it decodes and passes continuity review.
+Delivery resolution is separate from source resolution. MiniMax model canvases must be divisible by 32: use **1280×736** for a 720p-class landscape source, then crop the approved picture-locked master to 1280×720 before the single final 1080p upscale. A completed source clip may be cropped and upscaled to 1920×1080 at 24 fps only after it decodes and passes continuity review.
 
 For a multi-minute film, keep all approved source clips at one 720p delivery format, assemble 10-second editorial segments at that same format, then assemble the complete picture-locked 720p master. Upscale only that final master once. Repeated clip-level upscaling wastes time and adds recompression; parallel MiniMax jobs are forbidden on the same local machine.
 
@@ -47,3 +47,9 @@ Before a reinstall, update, or newly imported repository:
 6. Do not run a downloaded installer, `curl | sh`, or repository setup command until the intake record is approved.
 
 This gate reduces risk but cannot prove a third-party repository is safe. Preserve the intake evidence with the project.
+
+## Clean reinstall and runtime provenance
+
+If a local installation is repaired or reinstalled, keep the model weights separately from code so the clean checkout can be rebuilt without an unnecessary 136 GB redownload. Retire the old checkout for rollback until the replacement passes verification; do not let the active wrapper import a copied runtime directory from another project.
+
+Record the remote, immutable revision, Git integrity result, dependency-lock install result, actual resolved `minimax_h3_mlx` file path, absolute FFmpeg path, and a decoded smoke MP4. A smoke test confirms that the installation can run; it is not a substitute for the Filmcraft asset-first continuity review before a narrative render.

@@ -269,8 +269,22 @@ This rule applies by default to Flow, Veo, Higgsfield, OpenArt, and any future v
 
 For local MiniMax H3 work, read `references/minimax-local-reliability.md` and run `scripts/minimax_local_preflight.py` before every render. A blocked result is a hard stop: do not launch, retry, upscale, or reconfigure the model until the block is resolved and recorded.
 
-This installation uses a streamed BF16 route. Treat **5 seconds** as the maximum safe source duration unless a versioned, successful local feasibility record proves another configuration on the same machine. Produce a 10-second story unit as two independent 5-second source clips: approve the first clip, extract its final frame, review that frame, and use it as the second clip’s start-frame lock. Only then may the clips be stitched and upscaled for delivery.
+This installation uses a streamed BF16 route. Treat **5 seconds** as the maximum safe source duration unless a versioned, successful local feasibility record proves another configuration on the same machine. MiniMax requires a model canvas divisible by 32; use **1280×736** for a 720p-class landscape source, then crop the approved picture-locked master to 1280×720 during finishing. Produce a 10-second story unit as two independent 5-second source clips: approve the first clip, extract its final frame, review that frame, and use it as the second clip’s start-frame lock. Only then may the clips be stitched and upscaled for delivery.
 
 Run local generation as a one-shot process. Automatic relaunch is forbidden. Pass an absolute, preflight-verified ffmpeg path to MiniMax; launchd does not inherit the interactive shell PATH. On a Metal out-of-memory, runtime, or muxing error: stop the job, preserve the full error log and configuration, mark the attempt failed, and diagnose the cause before another attempt. Never hide failure with a background retry loop.
 
 Before updating, reinstalling, or importing a local generation repository, perform the repository intake gate in `references/minimax-local-reliability.md`. Verify origin and pinned revision, run Git integrity checks, inspect dependency declarations and installer paths, scan high-risk execution patterns, and record the result. A scan is evidence, not a guarantee of safety; do not import code solely because it has a GitHub URL.
+
+### Clean-runtime provenance control — mandatory
+
+A local MiniMax launcher must import its generation module directly from the pinned, health-checked checkout recorded in the unit ledger. Do **not** point a production launcher at a copied `runtime/` directory, an untracked package mirror, or an ambiguous `PYTHONPATH`; those arrangements prevent reproducible diagnosis and can silently retain outdated code.
+
+After a reinstall, update the active wrapper to name the canonical checkout and verify it by importing `minimax_h3_mlx` and recording its resolved file path. Before returning the renderer to production, require all of the following evidence:
+
+1. pinned repository origin and revision, plus a successful Git integrity check;
+2. a clean virtual environment built from the dependency lock;
+3. verified model paths and an absolute FFmpeg path;
+4. one decoded, muxed smoke MP4 made by the clean runtime; and
+5. a rollback location for the retired runtime and model weights.
+
+A successful smoke render proves only installation health. It does not approve character continuity, story assets, or a paid production clip; the dispatch and asset-first gates still apply.
