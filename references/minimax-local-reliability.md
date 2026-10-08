@@ -8,6 +8,8 @@ The installed route uses a streamed BF16 MiniMax H3 model and BF16 Turbo LoRA. I
 
 Delivery resolution is separate from source resolution. A completed source clip may be cropped and upscaled to 1920×1080 at 24 fps only after it decodes and passes continuity review.
 
+For a multi-minute film, keep all approved source clips at one 720p delivery format, assemble 10-second editorial segments at that same format, then assemble the complete picture-locked 720p master. Upscale only that final master once. Repeated clip-level upscaling wastes time and adds recompression; parallel MiniMax jobs are forbidden on the same local machine.
+
 ## Required preflight
 
 Run this read-only command from the skill folder or project copy, substituting the project paths:
