@@ -218,3 +218,59 @@ A production may use a generator, image tool, local workflow, editor, audio tool
 ## Source boundary
 
 This is an original operational synthesis informed by the public [AI Filmmaking Studio Community Edition](https://filmmaking.raviprolu.com/), plus Filmcraft’s existing character-led workflow. It uses its general production-control ideas—brief, canon, scene packets, review gates, delivery records, and selected roles—but does not reproduce the site’s examples, prompt library, case studies, or provider claims. Use the site directly for its own materials and independently verify any current tool information.
+
+## Filmcraft Dispatch Gate — mandatory for every future video generation
+
+This gate is non-optional for Filmcraft and AIC Filmcraft Studio productions, including Flow, Higgsfield, OpenArt, Veo, and any future video-generation tool. A request such as “create,” “generate,” or “next scene” begins planning only. It must never bypass this gate.
+
+Before pressing a paid generation control, the operator must create or update a shot record that proves all of the following:
+
+1. **Story authority:** identify the exact approved scene packet and beat. Do not invent a replacement beat, character entrance, action, or shot order. If a current scene card conflicts with an improvised plan, the scene card wins.
+2. **Continuity bundle:** list every visible character, location, and prop lock, with fixed identity, wardrobe, geography, and ownership details. Attach no unrelated reference. State exclusions in both prompt and acceptance test.
+3. **Physical ledger:** record first frame, timed action, final frame, character count, mechanics, prop ownership, screen direction, geography, light, and sound state. One generated clip has one primary physical action.
+4. **Risk design:** identify known failure modes and redesign the shot to remove them. Never use an over-the-shoulder composition if it could duplicate a character; split a complex interaction into one-character actions when necessary.
+5. **Prompt control:** use a fixed canon block plus a variable shot block with positive constraints and observable exclusions. Missing locks cannot be replaced by prompt wording.
+6. **Spend control:** verify model, aspect ratio, resolution, duration, output count, estimated credits, remaining budget, and destination immediately before dispatch. Show the resulting shot card and cost to the producer and obtain explicit approval for that exact attempt.
+
+After a render completes, review the moving clip at **0%, 25%, 50%, 75%, and 100%**. A thumbnail, a single still, or the generator title is never sufficient. Check identity, count, wardrobe, props, mechanics, geography, action, lighting, and final state. Record the result as approved, repair, or retired.
+
+If a candidate fails any required check, do not proceed to the next story dependency and do not reuse its visual state. Diagnose the failure, update the scene packet or shot design, and return to this gate. The next paid repair requires a new exact credit preflight and producer approval.
+
+
+### Asset-first 10-second unit rule — mandatory
+
+Treat every 10-second (or shorter) generated video as an independent production unit, even when several units belong to the same story scene. The unit folder is the only permitted source for that render. Create and verify the assets before opening a paid video-generation workflow.
+
+Use this required folder structure:
+
+```text
+[project]/production/scene-[NN]-[slug]/unit-[NN]-[slug]-[duration]/
+  01-authority/        # approved scene beat, shot card, continuity state
+  02-assets/           # character, location, prop, and start/end-frame locks
+  03-prompt/           # fixed block, variable action block, exclusions
+  04-upload-proof/     # uploaded asset names, destination/project, verification
+  05-renders/          # candidate video(s), review notes, approved selection
+  06-audio/            # dialogue, Foley, ambience, music references or stems
+  07-ledger/           # cost, approval, attempt, 0/25/50/75/100 review evidence
+```
+
+For every unit, execute this exact order:
+
+1. **Create the asset bundle first.** Copy or create only approved canon assets required by the unit. Give each file a stable, scene-and-unit-specific name. Create a manifest that names the visible character count, wardrobe, location geometry, prop ownership, start state, action, and end state. A previous failed candidate never becomes an asset lock.
+2. **Inspect the bundle before upload.** Check every asset against the active character, location, and prop sheets. Confirm that the visual design, door/window geometry, character count, hand/prop relationship, and story beat match the approved packet. Correct an asset before upload; never attempt to compensate for a missing or incorrect lock with prompt text.
+3. **Upload the verified bundle to the selected generator.** Record the destination project/account, each uploaded filename, upload completion state, and a visible proof that the files are available. Do not stage or submit a video while an upload is incomplete.
+4. **Stage one unit only.** Attach only that unit’s approved assets. Use a start-frame reference whenever character position, door state, or prop placement matters. State the exact character count and exclusions in the prompt. Do not combine two physical actions or two story beats in one 10-second unit.
+5. **Run the existing dispatch gate.** Verify settings, cost, and acceptance test, then obtain explicit producer approval for the exact attempt before submitting.
+6. **Review before advancing.** Review the moving clip at 0%, 25%, 50%, 75%, and 100%. Save the review in the unit folder. Only an approved unit may provide a carry-over frame or continuity state to the next unit.
+
+This rule applies by default to Flow, Veo, Higgsfield, OpenArt, and any future video generator. It overrides a request to generate immediately: first create assets, then upload and verify them, then stage, price, approve, render, and review.
+
+### Local MiniMax H3 reliability gate — mandatory
+
+For local MiniMax H3 work, read `references/minimax-local-reliability.md` and run `scripts/minimax_local_preflight.py` before every render. A blocked result is a hard stop: do not launch, retry, upscale, or reconfigure the model until the block is resolved and recorded.
+
+This installation uses a streamed BF16 route. Treat **5 seconds** as the maximum safe source duration unless a versioned, successful local feasibility record proves another configuration on the same machine. Produce a 10-second story unit as two independent 5-second source clips: approve the first clip, extract its final frame, review that frame, and use it as the second clip’s start-frame lock. Only then may the clips be stitched and upscaled for delivery.
+
+Run local generation as a one-shot process. Automatic relaunch is forbidden. On a Metal out-of-memory, runtime, or muxing error: stop the job, preserve the full error log and configuration, mark the attempt failed, and diagnose the cause before another attempt. Never hide failure with a background retry loop.
+
+Before updating, reinstalling, or importing a local generation repository, perform the repository intake gate in `references/minimax-local-reliability.md`. Verify origin and pinned revision, run Git integrity checks, inspect dependency declarations and installer paths, scan high-risk execution patterns, and record the result. A scan is evidence, not a guarantee of safety; do not import code solely because it has a GitHub URL.

@@ -77,6 +77,28 @@ Copy the smallest template that fits. Keep the current approved version in the p
 - Acceptance criteria:
 ```
 
+## Asset-first 10-second unit manifest
+
+Create one of these records in every `unit-[NN]-[slug]-[duration]` folder before any upload or paid render.
+
+```markdown
+# Unit [ID] — [duration] — [title]
+- Scene packet / canon version:
+- Incoming state → one timed action → outgoing state:
+- Visible character count and identity:
+- Locked location geometry and non-negotiable features:
+- Props, owner/hand/placement, and state:
+- Assets created or copied into `02-assets/`:
+- Visual inspection evidence and defects corrected:
+- Generator destination/account/project:
+- Uploaded filenames and completion proof:
+- Fixed canon block / variable action block / hard exclusions:
+- Settings and exact credits:
+- Producer approval for this exact attempt:
+- Moving-clip review: 0% / 25% / 50% / 75% / 100%:
+- Decision and approved carry-over frame/state:
+```
+
 ## Generation preflight and attempt record
 
 ```markdown
@@ -85,6 +107,24 @@ Copy the smallest template that fits. Keep the current approved version in the p
 ```
 
 Before submitting: confirm the current tool’s duration, reference, export, rights, and pricing conditions; check asset links; protect the reserve; state the single acceptance test.
+
+## Local MiniMax H3 feasibility and recovery record
+
+```markdown
+# Local MiniMax H3 job [ID]
+- Repository remote / pinned revision / integrity check:
+- Runtime, model root, LoRA, Python, and ffmpeg paths verified:
+- Machine memory / free disk / power state:
+- Source duration and 32-pixel-aligned canvas:
+- Preflight JSON path and PASS result:
+- One-shot job ID; automatic relaunch disabled:
+- Start-frame lock / prompt / seed / output path:
+- Result: complete / failed / blocked:
+- Full error log path and exact error signature:
+- Failure classification: memory / runtime / muxing / asset / continuity / other:
+- Approved recovery change (one variable only):
+- 0 / 25 / 50 / 75 / 100 percent review and carry-over frame:
+```
 
 ## Clip and seam review
 

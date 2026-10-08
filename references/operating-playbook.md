@@ -26,6 +26,7 @@ Use this guide for Short and Long mode, or whenever a production needs deeper co
 | 18 | Test a reference method | one controlled variable, cost ceiling, evidence, conclusion |
 | 19 | Select, edit, and review footage | selects, seams, cut version, sound pass, bounded notes |
 | 20 | Plan capability and feasibility | current tool evidence, fallback, budget reserve, test sequence |
+| 21 | Prepare every 10-second unit | dedicated folder, inspected asset bundle, upload proof, one action, carry-over state |
 
 ## Specialist department modules
 
@@ -72,3 +73,11 @@ Use one of these states: planned, in progress, blocked, failed, unverified, veri
 ## Tool decision discipline
 
 A production may use a generator, image tool, local workflow, editor, audio tool, storage system, or distribution platform. For the actual selected route, record the date checked, capability needed, credit/cost condition, duration and reference limits, commercial/rights condition, export behavior, fallback, and decision owner. Do not treat an old comparison, web page, or another project’s setup as current proof.
+
+## Local MiniMax H3 recovery control
+
+For the local streamed-BF16 MiniMax H3 route, run the AIC Filmcraft Studio preflight before each job and preserve its JSON result in the unit ledger. The current tested operating ceiling is a 5-second source clip. A 10-second story beat must be built from two reviewed 5-second clips, carrying only an approved final frame into the second clip.
+
+Use a one-shot process with persistent stdout/stderr. Automatic relaunch is prohibited. An `Insufficient Memory` Metal error is a feasibility failure: stop, preserve the error, reduce the source workload or change route, and rerun preflight. Do not repeat the same settings, blame reference assets, or advance the edit without a decoded and reviewed MP4.
+
+Before importing or reinstalling a generator repository, complete the repository intake gate in `minimax-local-reliability.md`: provenance and revision, Git integrity, dependencies and installer paths, static review of high-risk execution patterns, and an isolated doctor/test where practical.
