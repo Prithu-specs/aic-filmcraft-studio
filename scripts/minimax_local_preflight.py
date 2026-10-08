@@ -41,6 +41,7 @@ def main() -> int:
     parser.add_argument("--runtime", type=Path, required=True)
     parser.add_argument("--start-frame", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--ffmpeg", type=Path, default=Path(shutil.which("ffmpeg") or ""))
     args = parser.parse_args()
 
     checks: list[dict[str, object]] = []
@@ -65,7 +66,11 @@ def main() -> int:
     check("turbo_lora", args.turbo_lora.is_file(), "Turbo LoRA file is missing." if not args.turbo_lora.is_file() else "Turbo LoRA file found.")
     check("runtime", args.runtime.is_file(), "Reference-enabled runtime wrapper is missing." if not args.runtime.is_file() else "Runtime wrapper found.")
     check("start_frame", args.start_frame.is_file(), "Approved start-frame lock is missing." if not args.start_frame.is_file() else "Start-frame lock found.")
-    check("ffmpeg", shutil.which("ffmpeg") is not None, "ffmpeg is required for MP4 verification and final delivery.")
+    check(
+        "ffmpeg",
+        args.ffmpeg.is_file() and os.access(args.ffmpeg, os.X_OK),
+        f"ffmpeg must be an executable absolute path for the sanitized launch environment: {args.ffmpeg}",
+    )
 
     output_parent = args.output_dir.parent if args.output_dir.suffix else args.output_dir
     free_gib = gib(shutil.disk_usage(output_parent).free) if output_parent.exists() else 0
@@ -93,6 +98,7 @@ def main() -> int:
         "safe_bf16_max_seconds": SAFE_BF16_MAX_SECONDS,
         "checks": checks,
         "required_launch_policy": "one-shot job only; automatic relaunch is forbidden",
+        "required_runtime_media_policy": "pass the preflight-verified absolute --ffmpeg path; never rely on launchd PATH",
         "required_review_policy": "decode output, inspect 0/25/50/75/100 percent, then approve carry-over frame",
     }
     print(json.dumps(result, indent=2))

@@ -19,7 +19,7 @@ python3 scripts/minimax_local_preflight.py \
   --duration 5 --resolution 1344x768 --memory-limit-gb 24 \
   --model-root "/path/to/models/MiniMax-H3/FL2VA" \
   --turbo-lora "/path/to/minimax_h3_fl2v_turbo_4step_v1.0_768p_bf16.safetensors" \
-  --runtime "/path/to/run_evo.py" \
+  --runtime "/path/to/run_evo.py" --ffmpeg "/absolute/path/to/ffmpeg" \
   --start-frame "/path/to/approved-start-frame.png" \
   --output-dir "/path/to/unit/05-renders"
 ```
@@ -28,7 +28,7 @@ Proceed only on `"status": "PASS"`. The preflight checks duration, canvas alignm
 
 ## Dispatch and failure rules
 
-1. Use a one-shot job that captures stdout and stderr to the unit ledger. Do not use automatic process relaunch.
+1. Use a one-shot job that captures stdout and stderr to the unit ledger. Do not use automatic process relaunch. Pass the preflight-verified **absolute** ffmpeg path to MiniMax; launchd cannot be assumed to inherit an interactive shell PATH.
 2. Record the model canvas separately from the delivery canvas.
 3. If the first 5-second clip passes the moving review, extract and review its last frame before using it as the only carry-over reference for the next 5-second clip.
 4. On `Insufficient Memory`, stop. Do not repeat the same duration and canvas. Reduce source duration or canvas, reduce streamed block residency, or select another tool route. Change only one variable per recovery attempt.
