@@ -23,6 +23,21 @@ Work in this order:
 
 Use [production modes](references/production-modes.md) to choose the right depth. Use [working templates](references/templates.md) to create the production records. Use [roles and quality controls](references/roles-and-quality.md) when the project has more than one scene, a team, significant cost, a competition, or a public release. See the [studio coverage map](references/studio-map.md) for the workflow integration and the [full operating playbook](references/operating-playbook.md) for all twenty operating actions and specialist department routing.
 
+## Mandatory provider-neutral, Codex-first film workflow
+
+For Prithu's narrative films, this production sequence is mandatory across Higgsfield and any other compatible generation platform. The scene-folder structure is canonical; platform adapters may map it to each site's UI, but must not change scene IDs, filenames, approval states, or ledger fields. See `workflow/PROVIDER-NEUTRAL-PRODUCTION.md`, `workflow/PROVIDER-ADAPTER-CONTRACT.md`, and `adapters/higgsfield.md`.
+
+1. Assign four separate review roles: Film Director, Art Director, Music Director, and Lighting Director. Prithu is Producer and final approver; roles advise only.
+2. Approve the story, dialogue, sound/music plan, color bible, character and prop anatomy, locations, storyboards, and exact shot prompts before paid rendering.
+3. Create every still image in Codex only—including characters, prop sheets, locations, storyboards, and production start frames. Never spend Higgsfield image credits generating or editing these assets. Show and obtain approval of each image batch.
+4. **Create the local project from the scaffold** (`python3 scripts/create_film_project.py <name> --scene-count <approved-count>`), using the standard `scene-NN-slug` directory layout. Copy only approved, canon-locked stills into each scene's asset folder.
+5. Create the corresponding project and scene folders in the selected video platform. Import/export the approved Codex stills, ask the platform to copy/register them into its project assets, and verify each copy is available. Use exact approved pixels as video references. If a platform cannot create native folders or copy/register media, stop and document the limitation; use a clearly mapped logical folder only with Producer approval.
+6. Generate video one scene at a time. Before each attempt, show the scene card, model/settings, exact current credit quote, and acceptance checks; wait for the Producer's explicit GO for that exact attempt. Never infer batch approval. Retrying requires another quote and GO.
+7. Review each completed scene clip at 0/25/50/75/100%, including continuity, prop dimensions/ownership, action, dialogue/audio, and final state. Only approved clips proceed to assembly.
+8. After every required scene is complete and approved, assemble the scene clips in script order, review the full movie with sound, verify the master, then deliver and archive the project. Do not call a montage a complete movie while scenes remain missing or unapproved.
+
+Use the stable project and scene layout in `templates/film-project/`; platform-specific operations live under `adapters/`. A provider adapter may only translate operations—it cannot bypass approvals, image provenance, cost gates, asset-copy verification, clip review, or assembly checks. Codex quotas/costs and any video-platform credits must be disclosed accurately; never claim either is free without verification.
+
 ## 1. Select a production mode
 
 | Mode | Runtime | Apply |
